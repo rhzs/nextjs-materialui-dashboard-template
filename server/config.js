@@ -13,6 +13,12 @@ const logger = logdown('config', {
 });
 
 
+const ENVIRONMENT = {
+  DEV: 'development',
+  UAT: 'production',
+  PROD: 'production'
+};
+
 const COMMIT_FILE = path.join(__dirname, 'commit');
 const ROBOTS_DIR = path.join(__dirname, 'robots');
 const ROBOTS_ALLOW_FILE = path.join(ROBOTS_DIR, 'robots.txt');
@@ -76,7 +82,7 @@ function mergedCSP() {
     .reduce((accumulator, [key, value]) => ({...accumulator, [key]: value}), {});
 }
 
-const nodeEnvironment = process.env.NODE_ENV || 'production';
+const nodeEnvironment = process.env.NODE_ENV || ENVIRONMENT.PROD;
 
 const config = {
   CLIENT: {
@@ -97,7 +103,8 @@ const config = {
       ALLOWED_HOSTS: ['*.example.com'],
       DISALLOW: readFile(ROBOTS_DISALLOW_FILE, 'User-agent: *\r\nDisallow: /'),
     }
-  }
+  },
+  ENVIRONMENT
 };
 
 module.exports = config;

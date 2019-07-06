@@ -32,7 +32,7 @@ class Server {
   }
 
   initCaching() {
-    if (this.config.SERVER.ENVIRONMENT === 'test' || this.config.SERVER.ENVIRONMENT === 'development') {
+    if (this.config.SERVER.ENVIRONMENT === this.config.ENVIRONMENT.UAT || this.config.SERVER.ENVIRONMENT === this.config.ENVIRONMENT.DEV) {
       this.app.use(helmet.noCache());
     } else {
       this.app.use((req, res, next) => {
@@ -71,7 +71,7 @@ class Server {
   }
 
   initNextJs() {
-    const dev = this.config.SERVER.ENVIRONMENT !== 'production';
+    const dev = this.config.SERVER.ENVIRONMENT !==  this.config.ENVIRONMENT.PROD;
     this.nextjs = next({ dev });
   }
 
