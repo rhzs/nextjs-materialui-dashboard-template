@@ -1,6 +1,4 @@
 
-// require('newrelic')
-
 // const Sentry = require('@sentry/node');
 
 const express = require('express');
